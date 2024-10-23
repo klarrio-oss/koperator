@@ -4,6 +4,7 @@
 ![Released](https://img.shields.io/github/release-date/banzaicloud/koperator?label=Released)
 ![License](https://img.shields.io/github/license/banzaicloud/koperator?label=License)
 ![Go version (latest release)](https://img.shields.io/github/go-mod/go-version/banzaicloud/koperator/v0.22.0)
+test
 
 </p>
 
