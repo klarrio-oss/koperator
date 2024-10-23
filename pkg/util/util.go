@@ -344,8 +344,6 @@ func GetBrokerMetricsReporterImage(brokerConfig *v1beta1.BrokerConfig, kafkaClus
 
 // getRandomString returns a random string containing uppercase, lowercase and number characters with the length given
 func GetRandomString(length int) (string, error) {
-	rand.Seed(time.Now().UnixNano())
-
 	chars := []rune(symbolSet)
 
 	var b strings.Builder

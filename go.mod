@@ -1,6 +1,6 @@
 module github.com/banzaicloud/koperator
 
-go 1.19
+go 1.23
 
 require (
 	emperror.dev/errors v0.8.1
