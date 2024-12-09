@@ -137,6 +137,8 @@ require (
 )
 
 replace (
+	// solves https://github.com/cert-manager/cert-manager/issues/5953 without upstepping cert-manager
+	github.com/Venafi/vcert/v4 => github.com/jetstack/vcert/v4 v4.9.6-0.20230127103832-3aa3dfd6613d
 	github.com/gogo/protobuf => github.com/waynz0r/protobuf v1.3.3-0.20210811122234-64636cae0910
 	github.com/golang/protobuf => github.com/luciferinlove/protobuf v0.0.0-20220913214010-c63936d75066
 )
