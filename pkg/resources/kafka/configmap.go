@@ -102,7 +102,7 @@ func (r *Reconciler) getConfigProperties(bConfig *v1beta1.BrokerConfig, id int32
 	if err := config.Set(kafkautils.CruiseControlConfigMetricsReportersBootstrapServers, bootstrapServers); err != nil {
 		log.Error(err, fmt.Sprintf("setting '%s' in broker configuration resulted an error", kafkautils.CruiseControlConfigMetricsReportersBootstrapServers))
 	}
-	if err := config.Set(kafkautils.CruiseControlConfigMetricsReporterK8sMode, true); err != nil {
+	if err := config.Set(kafkautils.CruiseControlConfigMetricsReporterK8sMode, false); err != nil {
 		log.Error(err, fmt.Sprintf("setting '%s' in broker configuration resulted an error", kafkautils.CruiseControlConfigMetricsReporterK8sMode))
 	}
 
