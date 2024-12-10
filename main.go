@@ -111,20 +111,20 @@ func main() {
 
 	// adding indexers to KafkaTopics so that the KafkaTopic admission webhooks could work
 	ctx := context.Background()
-	var managerWatchCacheBuilder cache.NewCacheFunc
 
-	// When operator is started to watch resources in a specific set of namespaces, we use the MultiNamespacedCacheBuilder cache.
+	// When operator is started to watch resources in a specific set of namespaces, they are restricted on the watcher cache.
 	// In this scenario, it is also suggested to restrict the provided authorization to this namespace by replacing the default
 	// ClusterRole and ClusterRoleBinding to Role and RoleBinding respectively
 	// For further information see the kubernetes documentation about
 	// Using [RBAC Authorization](https://kubernetes.io/docs/reference/access-authn-authz/rbac/).
 	var namespaceList []string
+	watchCache := cache.Options{}
 	if namespaces != "" {
 		namespaceList = strings.Split(namespaces, ",")
 		for i := range namespaceList {
 			namespaceList[i] = strings.TrimSpace(namespaceList[i])
 		}
-		managerWatchCacheBuilder = cache.MultiNamespacedCacheBuilder(namespaceList)
+		watchCache.Namespaces = namespaceList
 	}
 
 	mgr, err := ctrl.NewManager(ctrl.GetConfigOrDie(), ctrl.Options{
@@ -132,7 +132,7 @@ func main() {
 		MetricsBindAddress:     metricsAddr,
 		LeaderElection:         enableLeaderElection,
 		LeaderElectionID:       "controller-leader-election-helper",
-		NewCache:               managerWatchCacheBuilder,
+		Cache:                  watchCache,
 		Port:                   webhookServerPort,
 		CertDir:                webhookCertDir,
 		HealthProbeBindAddress: healthProbesAddr,

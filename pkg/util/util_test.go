@@ -625,14 +625,14 @@ func TestConfigurationBackup(t *testing.T) {
 				ReadOnlyConfig: `advertised.listeners=INTERNAL://kafka-0.kafka.svc.cluster.local:9092
 broker.id=0
 cruise.control.metrics.reporter.bootstrap.servers=kafka-all-broker.kafka.svc.cluster.local:9092
-cruise.control.metrics.reporter.kubernetes.mode=true`,
+cruise.control.metrics.reporter.kubernetes.mode=false`,
 				BrokerConfig: &v1beta1.BrokerConfig{
 					Image:                "Image",
 					MetricsReporterImage: "MetricsReporterImage",
 					Config: `advertised.listeners=INTERNAL://kafka-0.kafka.svc.cluster.local:9092
 broker.id=0
 cruise.control.metrics.reporter.bootstrap.servers=kafka-all-broker.kafka.svc.cluster.local:9092
-cruise.control.metrics.reporter.kubernetes.mode=true`,
+cruise.control.metrics.reporter.kubernetes.mode=false`,
 					BrokerLabels: map[string]string{"apple": "tree"},
 					Affinity: &corev1.Affinity{
 						NodeAffinity: &corev1.NodeAffinity{
