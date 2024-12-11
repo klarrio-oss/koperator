@@ -24,6 +24,7 @@ import (
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/util/validation/field"
+	"sigs.k8s.io/controller-runtime/pkg/webhook/admission"
 
 	"github.com/go-logr/logr"
 
@@ -35,7 +36,7 @@ type KafkaClusterValidator struct {
 	Log logr.Logger
 }
 
-func (s KafkaClusterValidator) ValidateUpdate(ctx context.Context, oldObj, newObj runtime.Object) error {
+func (s KafkaClusterValidator) ValidateUpdate(ctx context.Context, oldObj, newObj runtime.Object) (admission.Warnings, error) {
 	var allErrs field.ErrorList
 	kafkaClusterOld := oldObj.(*banzaicloudv1beta1.KafkaCluster)
 	kafkaClusterNew := newObj.(*banzaicloudv1beta1.KafkaCluster)
@@ -44,7 +45,7 @@ func (s KafkaClusterValidator) ValidateUpdate(ctx context.Context, oldObj, newOb
 	fieldErr, err := checkBrokerStorageRemoval(&kafkaClusterOld.Spec, &kafkaClusterNew.Spec)
 	if err != nil {
 		log.Error(err, errorDuringValidationMsg)
-		return apierrors.NewInternalError(errors.WithMessage(err, errorDuringValidationMsg))
+		return nil, apierrors.NewInternalError(errors.WithMessage(err, errorDuringValidationMsg))
 	}
 	if fieldErr != nil {
 		allErrs = append(allErrs, fieldErr)
@@ -56,16 +57,16 @@ func (s KafkaClusterValidator) ValidateUpdate(ctx context.Context, oldObj, newOb
 	}
 
 	if len(allErrs) == 0 {
-		return nil
+		return nil, nil
 	}
 
 	log.Info("rejected", "invalid field(s)", allErrs.ToAggregate().Error())
-	return apierrors.NewInvalid(
+	return nil, apierrors.NewInvalid(
 		kafkaClusterNew.GroupVersionKind().GroupKind(),
 		kafkaClusterNew.Name, allErrs)
 }
 
-func (s KafkaClusterValidator) ValidateCreate(ctx context.Context, obj runtime.Object) error {
+func (s KafkaClusterValidator) ValidateCreate(ctx context.Context, obj runtime.Object) (admission.Warnings, error) {
 	var allErrs field.ErrorList
 	kafkaCluster := obj.(*banzaicloudv1beta1.KafkaCluster)
 	log := s.Log.WithValues("name", kafkaCluster.GetName(), "namespace", kafkaCluster.GetNamespace())
@@ -76,17 +77,17 @@ func (s KafkaClusterValidator) ValidateCreate(ctx context.Context, obj runtime.O
 	}
 
 	if len(allErrs) == 0 {
-		return nil
+		return nil, nil
 	}
 
 	log.Info("rejected", "invalid field(s)", allErrs.ToAggregate().Error())
-	return apierrors.NewInvalid(
+	return nil, apierrors.NewInvalid(
 		kafkaCluster.GroupVersionKind().GroupKind(),
 		kafkaCluster.Name, allErrs)
 }
 
-func (s KafkaClusterValidator) ValidateDelete(ctx context.Context, obj runtime.Object) error {
-	return nil
+func (s KafkaClusterValidator) ValidateDelete(ctx context.Context, obj runtime.Object) (admission.Warnings, error) {
+	return nil, nil
 }
 
 // checkBrokerStorageRemoval checks if there is any broker storage which has been removed. If yes, admission will be rejected

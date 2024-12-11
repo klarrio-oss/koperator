@@ -166,7 +166,7 @@ func expectKafkaBrokerConfigmap(ctx context.Context, kafkaCluster *v1beta1.Kafka
 broker.id=%d
 control.plane.listener.name=CONTROLLER
 cruise.control.metrics.reporter.bootstrap.servers=kafkacluster-1-all-broker.kafka-1.svc.cluster.local:29092
-cruise.control.metrics.reporter.kubernetes.mode=true
+cruise.control.metrics.reporter.kubernetes.mode=false
 inter.broker.listener.name=INTERNAL
 listener.security.protocol.map=INTERNAL:PLAINTEXT,CONTROLLER:PLAINTEXT,TEST:PLAINTEXT
 listeners=INTERNAL://:29092,CONTROLLER://:29093,TEST://:9094
