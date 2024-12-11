@@ -82,7 +82,7 @@ linters-settings:
       See the License for the specific language governing permissions and
       limitations under the License.
   goimports:
-    local-prefixes: github.com/banzaicloud/koperator
+    local-prefixes: github.com/klarrio/koperator
   golint:
     min-confidence: 0.1
   lll:

@@ -12,7 +12,7 @@ Before installing the chart, you must first install the Koperator CustomResource
 This is performed in a separate step to allow you to easily uninstall and reinstall Koperator without deleting your installed custom resources.
 
 ```
-kubectl create --validate=false -f https://github.com/banzaicloud/koperator/releases/download/v0.25.1/kafka-operator.crds.yaml
+kubectl create --validate=false -f https://github.com/banzaicloud/koperator/releases/download/v0.26.0/kafka-operator.crds.yaml
 ```
 
 To install the chart:
@@ -52,8 +52,8 @@ The following table lists the configurable parameters of the Banzaicloud Kafka O
 
 Parameter | Description | Default
 --------- | ----------- | -------
-`operator.image.repository` | Operator container image repository | `ghcr.io/banzaicloud/kafka-operator`
-`operator.image.tag` | Operator container image tag | `v0.26.0-dev.0`
+`operator.image.repository` | Operator container image repository | `ghcr.io/klarrio/kafka-operator`
+`operator.image.tag` | Operator container image tag | `v0.26.0`
 `operator.image.pullPolicy` | Operator container image pull policy | `IfNotPresent`
 `operator.serviceAccount.name` | ServiceAccount used by the operator pod | `kafka-operator`
 `operator.serviceAccount.create` | If true, create the `operator.serviceAccount.name` service account | `true`
