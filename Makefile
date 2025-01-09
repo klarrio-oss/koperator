@@ -7,7 +7,7 @@ BOILERPLATE_DIR := $(PROJECT_DIR)/hack/boilerplate
 
 # Image URL to use all building/pushing image targets
 TAG ?= $(shell git describe --tags --abbrev=0 --match 'v[0-9].*[0-9].*[0-9]' 2>/dev/null )
-IMG ?= ghcr.io/klarrio/kafka-operator:$(TAG)
+IMG ?= ghcr.io/klarrio-oss/kafka-operator:$(TAG)
 
 # Produce CRDs that work back to Kubernetes 1.11 (no version conversion)
 CRD_OPTIONS ?= "crd"
@@ -99,7 +99,7 @@ test: generate fmt vet manifests bin/setup-envtest ## Run unit and integration (
 
 # Run e2e tests
 test-e2e:
-	 IMG_E2E=${IMG_E2E} go test github.com/klarrio/koperator/tests/e2e \
+	 IMG_E2E=${IMG_E2E} go test github.com/klarrio-oss/koperator/tests/e2e \
 		-v \
 		-timeout 20m \
 		-tags e2e \

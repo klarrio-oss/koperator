@@ -105,7 +105,7 @@ You can deploy Koperator using a Helm chart. Complete the following steps.
 1. Install the Koperator `CustomResourceDefinition` resources (adjust the version number to the Koperator release you want to install). This is performed in a separate step to allow you to uninstall and reinstall Koperator without deleting your already installed custom resources.
 
 ```
-kubectl create --validate=false -f https://github.com/klarrio/koperator/releases/download/v0.26.0/kafka-operator.crds.yaml
+kubectl create --validate=false -f https://github.com/klarrio-oss/koperator/releases/download/v0.26.1/kafka-operator.crds.yaml
 ```
 
 2. Install Koperator into the `kafka` namespace:
