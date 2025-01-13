@@ -1,0 +1,15 @@
+apiVersion: v1
+entries:
+  kafka-operator:
+  - apiVersion: v1
+    appVersion: v0.26.2
+    created: "2025-01-13T14:28:23.53173139Z"
+    description: kafka-operator manages Kafka deployments on Kubernetes
+    digest: 5ced82aca01fd691303f13611f4b1c4e70f60ad13ea1d5409544ee42a85a4acd
+    name: kafka-operator
+    sources:
+    - https://github.com/klarrio-oss/koperator
+    urls:
+    - https://github.com/klarrio-oss/koperator/releases/download/kafka-operator-0.26.2/kafka-operator-0.26.2.tgz
+    version: 0.26.2
+generated: "2025-01-13T14:28:23.5317422Z"
