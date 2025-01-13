@@ -1,6 +1,6 @@
 version: "2"
 domain: banzaicloud.io
-repo: github.com/klarrio/koperator
+repo: github.com/klarrio-oss/koperator
 resources:
 - group: kafka
   version: v1beta1
