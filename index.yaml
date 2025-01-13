@@ -12,4 +12,15 @@ entries:
     urls:
     - https://github.com/klarrio-oss/koperator/releases/download/kafka-operator-0.26.2/kafka-operator-0.26.2.tgz
     version: 0.26.2
-generated: "2025-01-13T14:28:23.5317422Z"
+  - apiVersion: v1
+    appVersion: v0.26.1
+    created: "2025-01-13T15:43:40.130169355Z"
+    description: kafka-operator manages Kafka deployments on Kubernetes
+    digest: 58ebea4afdbcec94726713ea8827e34801f1f3162649b256d8b2f363d82281db
+    name: kafka-operator
+    sources:
+    - https://github.com/klarrio-oss/koperator
+    urls:
+    - https://github.com/klarrio-oss/koperator/releases/download/kafka-operator-0.26.1/kafka-operator-0.26.1.tgz
+    version: 0.26.1
+generated: "2025-01-13T15:43:40.130187819Z"
