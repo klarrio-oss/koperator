@@ -48,7 +48,7 @@ jobs:
       - name: Build kafka-operator
         uses: docker/build-push-action@v3
         with:
-          tags: ghcr.io/banzaicloud/kafka-operator:${{ steps.imagetag.outputs.value }}
+          tags: ghcr.io/klarrio-oss/kafka-operator:${{ steps.imagetag.outputs.value }}
           file: Dockerfile
           platforms: ${{ env.PLATFORMS }}
           push: true

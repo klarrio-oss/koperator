@@ -11,7 +11,7 @@ replicaCount: 1
 operator:
   annotations: {}
   image:
-    repository: ghcr.io/banzaicloud/kafka-operator
+    repository: ghcr.io/klarrio-oss/kafka-operator
     tag: ""
     pullPolicy: IfNotPresent
   # In constrained environments where operator cannot
