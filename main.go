@@ -134,13 +134,9 @@ func main() {
 		CertDir: webhookCertDir,
 	})
 
-	mso := metricsserver.Options{
-		BindAddress: metricsAddr,
-	}
-
 	mgr, err := ctrl.NewManager(ctrl.GetConfigOrDie(), ctrl.Options{
 		Scheme:                 scheme,
-		Metrics:                mso,
+		Metrics:                metricsserver.Options{BindAddress: metricsAddr},
 		LeaderElection:         enableLeaderElection,
 		LeaderElectionID:       "controller-leader-election-helper",
 		Cache:                  watchCache,
