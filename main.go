@@ -37,6 +37,8 @@ import (
 
 	"sigs.k8s.io/controller-runtime/pkg/cache"
 	"sigs.k8s.io/controller-runtime/pkg/healthz"
+	metricsserver "sigs.k8s.io/controller-runtime/pkg/metrics/server"
+	"sigs.k8s.io/controller-runtime/pkg/webhook"
 
 	istioclientv1beta1 "github.com/banzaicloud/istio-client-go/pkg/networking/v1beta1"
 
@@ -123,19 +125,23 @@ func main() {
 		namespaceList = strings.Split(namespaces, ",")
 		for i := range namespaceList {
 			namespaceList[i] = strings.TrimSpace(namespaceList[i])
+			watchCache.DefaultNamespaces[strings.TrimSpace(namespaceList[i])] = cache.Config{}
 		}
-		watchCache.Namespaces = namespaceList
 	}
+
+	whs := webhook.NewServer(webhook.Options{
+		Port:    webhookServerPort,
+		CertDir: webhookCertDir,
+	})
 
 	mgr, err := ctrl.NewManager(ctrl.GetConfigOrDie(), ctrl.Options{
 		Scheme:                 scheme,
-		MetricsBindAddress:     metricsAddr,
+		Metrics:                metricsserver.Options{BindAddress: metricsAddr},
 		LeaderElection:         enableLeaderElection,
 		LeaderElectionID:       "controller-leader-election-helper",
 		Cache:                  watchCache,
-		Port:                   webhookServerPort,
-		CertDir:                webhookCertDir,
 		HealthProbeBindAddress: healthProbesAddr,
+		WebhookServer:          whs,
 	})
 	if err != nil {
 		setupLog.Error(err, "unable to start manager")
